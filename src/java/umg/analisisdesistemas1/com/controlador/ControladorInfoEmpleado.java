@@ -25,7 +25,8 @@ import static java.lang.System.out;
 public class ControladorInfoEmpleado extends HttpServlet {
 
     private ModeloInfoUsuario modeloinfoUsuario = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
+
     private DataSource ds;
 
     @Override
