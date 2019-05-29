@@ -11,43 +11,53 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import javax.sql.DataSource;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 import umg.analisisdesistemas1.com.objeto.CuentaContable;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-/**
- *
- * @author DELLMAYORGA
- */
-public class ModeloCodigoActivo {
+public class ModeloCodigoActivo extends Conexion {
+
     private DataSource ds;
     private String codigo_activo = "";
-    
+
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
+
     public ModeloCodigoActivo(DataSource ds) {
         this.ds = ds;
     }
-    
-    public String obtenerCodigoActivo(String codigo_referencia){
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
+
+    public ModeloCodigoActivo() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
+    public String obtenerCodigoActivo(String codigo_referencia) {
+
         ResultSet rs = null;
-        
-        try{
+
+        try {
             //1 Primero, establezco la conexion
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{? = call fn_genera_codigo_activo(?)}";
-            cs = conexion.prepareCall(sql);
+            PreparedStatement cs = conn.prepareStatement(sql);
+
+            //cs = conexion.prepareCall(sql);
             //3 setear los parametros de salida de la funcion, y de entrada ya que devuelve el codigo esta funcion
-            cs.registerOutParameter(1, Types.VARCHAR);
+            //cs.registerOutParameter(1, Types.VARCHAR);
             cs.setString(2, codigo_referencia);
-            //4 ejecutar la consulta
             cs.execute();
+            while (rs.next()) {
+                codigo_activo = rs.getString(1);
+            }
             //5 Asigno el valor de la consulta a la variable
-            codigo_activo = cs.getString(1);
-        } catch(Exception e){
-            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        
+
         return codigo_activo;
     }
 }

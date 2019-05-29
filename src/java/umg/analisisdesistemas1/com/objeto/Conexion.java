@@ -19,11 +19,11 @@ public class Conexion {
 
     public Conexion() {
         try {
-            //Class.forName("com.mysql.jdbc.Driver");
+
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnx = DriverManager.getConnection("jdbc:sqlserver://testcoopo.database.windows.net:1433;database=ACTIVOS_FIJOS;user=emayorga@testcoopo;password=Test2019;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
             System.out.println("WORK");
-            //cnx = DriverManager.getConnection("jdbc:mysql://localhost:7702/blog?user=root&password=naruto10");
+
         } catch (ClassNotFoundException e) {
             System.err.println("Error: " + e);
         } catch (SQLException e) {
