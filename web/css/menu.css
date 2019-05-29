@@ -1,0 +1,91 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28/03/2019, 09:36:34 PM
+    Author     : DELLMAYORGA
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    background: #0b2027;
+    font-family: 'Roboto', sans-serif;
+    line-height: 18px;  //es opcional
+}
+a{
+    text-decoration: none;
+    color: #494949;  //aqui era blanco
+}
+.btn-menu {
+    display: block;
+    padding: 20px;
+    background: #0d2c44;
+    color: #fff;
+}
+.btn-menu .icono{
+    float: right;
+}
+.contenedor-menu{
+    width: 22%;
+    //min-width: 22px;
+    overflow: auto;
+    margin: 10px;
+    display: inline-block;  //esto estaba descomentado
+    font-family: 'Roboto', sans-serif;
+    line-height: 18px;
+}
+.contenedor-menu .menu{
+    width: 100%;
+}
+.contenedor-menu ul{
+    list-style: none;
+}
+.contenedor-menu .menu li a{
+    color: #494949;
+    display: block;
+    padding: 5px 10px;
+    background: #e9e9e9;
+}
+.contenedor-menu .menu li a:hover{
+    background: #1a95d5;
+    color:#fff;
+}
+.contenedor-menu .menu .icono{
+    font-size: 12px;
+    line-height: 18px;
+}
+.contenedor-menu .menu .icono.izquierda{
+    float: left;
+    margin-right: 10px;
+}
+.contenedor-menu .menu .icono.derecha{
+    float: right;
+    margin-left: 10px;
+}
+.contenedor-menu .menu ul{
+    //display: none;
+}
+.contenedor-menu .menu ul li a{
+    background: #424242;
+    color: #e9e9e9;
+}
+.contenedor-menu .menu .activado > a{
+    background: #1a95d5;
+    color: #fff;
+}
+/*.contenedor-menu{
+    //margin: 0;
+    width: 22%;
+    position: fixed;
+    //top: 0;
+    z-index: 1000;
+    background-color: #f3da0b;
+}*/

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFichaActivosFijos" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLServerConexion"/>
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="237"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="752"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="538"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="448"/>
+	<parameter name="codigo_activo" class="java.lang.String"/>
+	<parameter name="descripcion_corta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="referencia_activo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_adquisicion_desde" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_adquisicion_hasta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codigo_proveedor" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="factura" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codigo_empleado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[{call sp_obtener_datos_ficha_activos($P{codigo_activo}, $P{descripcion_corta}, $P{referencia_activo}, $P{fecha_adquisicion_desde}, $P{fecha_adquisicion_hasta}, $P{codigo_proveedor}, $P{factura}, $P{codigo_empleado}
+)}]]>
+	</queryString>
+	<field name="act_codigo_clasificacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="act_codigo_clasificacion"/>
+	</field>
+	<field name="nombre_activo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_activo"/>
+	</field>
+	<field name="descripcion_larga" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion_larga"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="AF_ACTIVO"/>
+	</field>
+	<field name="nombre_cuenta_activo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_cuenta_activo"/>
+	</field>
+	<field name="act_cuenta_activo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="act_cuenta_activo"/>
+	</field>
+	<field name="act_cuenta_depre_acumulado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="act_cuenta_depre_acumulado"/>
+	</field>
+	<field name="nombre_cuenta_pasivo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_cuenta_pasivo"/>
+	</field>
+	<field name="act_cuenta_gasto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="act_cuenta_gasto"/>
+	</field>
+	<field name="nombre_cuenta_gasto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_cuenta_gasto"/>
+	</field>
+	<field name="departamento1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="departamento1"/>
+	</field>
+	<field name="fecha_adquisicion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_adquisicion"/>
+	</field>
+	<field name="fecha_inicio_depreciacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_inicio_depreciacion"/>
+	</field>
+	<field name="valor_adquisicion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="valor_adquisicion"/>
+	</field>
+	<field name="valor_inicial_libros" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="valor_inicial_libros"/>
+	</field>
+	<field name="porc_depreciacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="porc_depreciacion"/>
+	</field>
+	<field name="valor_depre_mensual" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="valor_depre_mensual"/>
+	</field>
+	<field name="valor_depre_anual" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="valor_depre_anual"/>
+	</field>
+	<field name="nombre_proveedor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_proveedor"/>
+	</field>
+	<field name="fecha_factura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_factura"/>
+	</field>
+	<field name="no_factura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="no_factura"/>
+	</field>
+	<field name="monto_factura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="monto_factura"/>
+	</field>
+	<field name="codigo_empleado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigo_empleado"/>
+	</field>
+	<field name="nombre_empleado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_empleado"/>
+	</field>
+	<field name="puesto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="puesto"/>
+	</field>
+	<field name="departamento2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="departamento2"/>
+	</field>
+	<field name="ubicacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ubicacion"/>
+	</field>
+	<field name="codigo_centro_costo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigo_centro_costo"/>
+	</field>
+	<field name="observaciones" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="observaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="AF_ACTIVO"/>
+	</field>
+	<detail>
+		<band height="711" splitType="Stretch">
+			<staticText>
+				<reportElement x="317" y="210" width="166" height="20" />
+				<text><![CDATA[Cuenta de activo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="230" width="166" height="20" />
+				<text><![CDATA[Cuenta depreciación acumulada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="250" width="166" height="20" />
+				<text><![CDATA[Cuenta de gasto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="290" width="166" height="20" />
+				<text><![CDATA[Fecha inicio depreciación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="310" width="166" height="20" />
+				<text><![CDATA[Valor en libros inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="350" width="166" height="20" />
+				<text><![CDATA[Depreciación mensual:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="92" width="280" height="20" />
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[1. INFORMACION DEL ACTIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="122" width="130" height="20" >
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="231b9322-66db-44fa-964d-4fbc628da68d"/>
+				</reportElement>
+				<text><![CDATA[Código:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="142" width="130" height="20" />
+				<text><![CDATA[Descripción corta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="162" width="130" height="20" />
+				<text><![CDATA[Descripción larga:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="210" width="130" height="20" />
+				<text><![CDATA[Clasificación del activo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="230" width="130" height="20" />
+				<text><![CDATA[Clasificación del pasivo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="250" width="130" height="20" />
+				<text><![CDATA[Clasificación gasto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="270" width="130" height="20" />
+				<text><![CDATA[Departamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="290" width="130" height="20" />
+				<text><![CDATA[Fecha adquisición:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="310" width="130" height="20" />
+				<text><![CDATA[Valor adquisición]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="330" width="130" height="20" />
+				<text><![CDATA[% Depreciación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="350" width="130" height="20" />
+				<text><![CDATA[Depreciación anual:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="420" width="130" height="20" />
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="440" width="130" height="20" />
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="460" width="130" height="20" />
+				<text><![CDATA[No. Factura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="480" width="130" height="20" />
+				<text><![CDATA[Monto factura (IVA incluido):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="520" width="280" height="20" />
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[3. DATOS DE RESPONSABLE Y CUSTODIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="550" width="130" height="20" />
+				<text><![CDATA[Código de empleado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="570" width="130" height="20" />
+				<text><![CDATA[Empleado responsable:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="590" width="130" height="20" />
+				<text><![CDATA[Puesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="610" width="130" height="20" />
+				<text><![CDATA[Departamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="630" width="130" height="20" />
+				<text><![CDATA[Ubicacion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="650" width="130" height="61" />
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="550" width="79" height="20" />
+				<text><![CDATA[Centro de costo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="625" width="252" height="20" />
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<line>
+				<reportElement x="317" y="625" width="252" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="5" y="390" width="280" height="20" />
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[2. DATOS DE ADQUISICION DEL ACTIVO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="142" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_activo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="122" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{act_codigo_clasificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="210" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_cuenta_activo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="210" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{act_cuenta_activo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="230" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_cuenta_pasivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="230" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{act_cuenta_depre_acumulado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="250" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_cuenta_gasto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="250" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{act_cuenta_gasto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="290" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{fecha_adquisicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="290" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{fecha_inicio_depreciacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="140" y="310" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{valor_adquisicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="310" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{valor_inicial_libros}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="330" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{porc_depreciacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="350" width="138" height="20" />
+				<textFieldExpression><![CDATA[$F{valor_depre_anual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="350" width="86" height="20" />
+				<textFieldExpression><![CDATA[$F{valor_depre_mensual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="420" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="460" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{no_factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="480" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{monto_factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="550" width="182" height="20" />
+				<textFieldExpression><![CDATA[$F{codigo_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="570" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="440" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{fecha_factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="590" width="434" height="20" />
+				<textFieldExpression><![CDATA[$F{puesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="610" width="182" height="20" />
+				<textFieldExpression><![CDATA[$F{departamento2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="630" width="182" height="20" />
+				<textFieldExpression><![CDATA[$F{ubicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="550" width="33" height="20" />
+				<textFieldExpression><![CDATA[$F{codigo_centro_costo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="162" width="429" height="48" />
+				<textFieldExpression><![CDATA[$F{descripcion_larga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="650" width="434" height="61" />
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="10" width="210" height="72" />
+				<imageExpression><![CDATA["C:\\Users\\DELLMAYORGA\\Documents\\NetBeansProjects\\ActivosFijosCopo\\web\\imagenes\\logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="220" y="30" width="280" height="30" />
+				<textElement textAlignment="Center">
+					<font fontName="Courier New" size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE ACTIVOS FIJOS]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

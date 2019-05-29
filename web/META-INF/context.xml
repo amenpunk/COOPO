@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<Context antiJARLocking="false" path="">-->
+<Context antiJARLocking="false" path="">
+    <Resource name="pool_conexiones" 
+             auth="Container" 
+             type="javax.sql.DataSource" 
+             maxActive="25" 
+             maxIdle="3" 
+             maxWait="5000" 
+             username="emayorga@testcoopo" 
+             password="Test2019" 
+             driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+             url = "jdbc:sqlserver://testcoopo.database.windows.net:1433;databaseName=ACTIVOS_FIJOS;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;" >
+    </Resource>
+</Context>
