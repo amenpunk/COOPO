@@ -21,16 +21,17 @@ import umg.analisisdesistemas1.com.modelo.ModeloCodigoActivo;
  * @author DELLMAYORGA
  */
 public class ControladorCodigoActivo extends HttpServlet {
+
     private ModeloCodigoActivo modeloCodigoActivo = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String otro = "";
-    
+
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloCodigoActivo = new ModeloCodigoActivo(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -46,7 +47,7 @@ public class ControladorCodigoActivo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,22 +65,22 @@ public class ControladorCodigoActivo extends HttpServlet {
         String valor_referencia = "";
         String cadenaJSON = "";
         String mensaje = "";
-        
-        try{
-            String codigo_referencia =  request.getParameter("codigo_referencia");
+
+        try {
+            String codigo_referencia = request.getParameter("codigo_referencia");
             valor_referencia = modeloCodigoActivo.obtenerCodigoActivo(codigo_referencia);
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            
-            if(!codigo_referencia.equals("")){
-                cadenaJSON = "[{\"codigo_ref\":\""+ valor_referencia +"\"}]";   //creo una cadena con formato JSON
+
+            if (!codigo_referencia.equals("")) {
+                cadenaJSON = "[{\"codigo_ref\":\"" + valor_referencia + "\"}]";   //creo una cadena con formato JSON
                 response.getWriter().write(cadenaJSON);
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             mensaje = e.getMessage();
-        } finally{
+        } finally {
             out.flush();
         }
     }

@@ -22,20 +22,22 @@ import umg.analisisdesistemas1.com.objeto.Departamento;
  * @author DELLMAYORGA
  */
 public class ControladorDepartamento extends HttpServlet {
+
     private ModeloDepartamento modeloDepartamento = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloDepartamento = new ModeloDepartamento(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,18 +52,18 @@ public class ControladorDepartamento extends HttpServlet {
         int codigo_compania = 0;
         String listaDeptos = "";
         ArrayList<Departamento> listaDepartamentos = new ArrayList<Departamento>();
-        
+
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        try{
+        try {
             codigo_compania = Integer.valueOf(request.getParameter("codigo_compania"));
             listaDepartamentos = modeloDepartamento.obtenerListaDepartamento(codigo_compania);    //obtengo la lista de departamentos
             Gson gson = new Gson();
             listaDeptos = gson.toJson(listaDepartamentos);
             response.getWriter().write(listaDeptos);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

@@ -23,17 +23,18 @@ import umg.analisisdesistemas1.com.objeto.Proveedor;
  * @author DELLMAYORGA
  */
 public class ControladorProveedor extends HttpServlet {
+
     private ModeloProveedor modeloProveedor = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloProveedor = new ModeloProveedor(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -55,7 +56,7 @@ public class ControladorProveedor extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorProveedor</title>");            
+            out.println("<title>Servlet ControladorProveedor</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorProveedor at " + request.getContextPath() + "</h1>");
@@ -80,19 +81,19 @@ public class ControladorProveedor extends HttpServlet {
         //processRequest(request, response);
         ArrayList<Proveedor> listaProveedor = new ArrayList<Proveedor>();
         String cadenaJSON = "";
-        try{
+        try {
             int opcion = Integer.parseInt(request.getParameter("opcion"));
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            
+
             listaProveedor = modeloProveedor.obtenerListaProveedor(opcion);
             Gson gson = new Gson();
             cadenaJSON = gson.toJson(listaProveedor);
             response.getWriter().write(cadenaJSON);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

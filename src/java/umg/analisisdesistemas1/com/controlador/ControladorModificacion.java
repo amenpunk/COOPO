@@ -20,20 +20,22 @@ import umg.analisisdesistemas1.com.modelo.ModeloActivo;
  * @author Richard
  */
 public class ControladorModificacion extends HttpServlet {
- private ModeloActivo modeloActivo = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+
+    private ModeloActivo modeloActivo = null;
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloActivo = new ModeloActivo(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,7 +54,7 @@ public class ControladorModificacion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorModificacion</title>");            
+            out.println("<title>Servlet ControladorModificacion</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorModificacion at " + request.getContextPath() + "</h1>");
@@ -99,28 +101,28 @@ public class ControladorModificacion extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
         int opcion;
-        int codigo_activo; 
+        int codigo_activo;
         String descripcion = "";
-        int codigo_empleado; 
-        float valor_adquisicion; 
+        int codigo_empleado;
+        float valor_adquisicion;
         String observaciones = "";
         int codigo_departamento;
         int ubicacion;
         mensaje = "";
-        
-        try{
+
+        try {
             opcion = 1;
-            codigo_activo = Integer.parseInt (request.getParameter("cbnombreactivo"));
+            codigo_activo = Integer.parseInt(request.getParameter("cbnombreactivo"));
             descripcion = request.getParameter("taDescripcionModificacion");
-            codigo_empleado = Integer.parseInt (request.getParameter("txtCodigoEmpleado"));
-            valor_adquisicion = Float.parseFloat (request.getParameter("txtValorAgregado"));
+            codigo_empleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+            valor_adquisicion = Float.parseFloat(request.getParameter("txtValorAgregado"));
             observaciones = request.getParameter("taObservaciones");
             codigo_departamento = Integer.parseInt(request.getParameter("cbDepartamento"));
             ubicacion = Integer.parseInt(request.getParameter("cbUbicacion"));
-            
-            mensaje = modeloActivo.mensajeModificacionActivo(opcion, codigo_activo, descripcion, codigo_empleado, valor_adquisicion, observaciones, codigo_departamento,ubicacion);
-                
-            if(mensaje.equals("ACTUALIZADO")){   //si el mensaje es 
+
+            mensaje = modeloActivo.mensajeModificacionActivo(opcion, codigo_activo, descripcion, codigo_empleado, valor_adquisicion, observaciones, codigo_departamento, ubicacion);
+
+            if (mensaje.equals("ACTUALIZADO")) {   //si el mensaje es
                 /*Enviamos un mensaje de que se guardo el activo, para esto usamos sweetalert
                 enviando desde este servlet el script que contiene jquery y sweetalert, para mostrar un bonti
                 mensaje de alerta en la página JSP*/
@@ -137,7 +139,7 @@ public class ControladorModificacion extends HttpServlet {
                 pw.println("</script>");
                 RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                 rd.include(request, response);
-            } else if(mensaje.equals("NO SE PUDO ACTUALIZAR")){     //si el mensaje es de fallo
+            } else if (mensaje.equals("NO SE PUDO ACTUALIZAR")) {     //si el mensaje es de fallo
                 pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                 pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                 pw.println("<script>");
@@ -151,8 +153,8 @@ public class ControladorModificacion extends HttpServlet {
                 pw.println("</script>");
                 RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                 rd.include(request, response);
-            } 
-        } catch(Exception e){
+            }
+        } catch (Exception e) {
             pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
             pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
             pw.println("<script>");
@@ -167,7 +169,7 @@ public class ControladorModificacion extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
             rd.include(request, response);
         } finally {
-            
+
         }
     }
 
@@ -176,7 +178,7 @@ public class ControladorModificacion extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-@Override
+    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

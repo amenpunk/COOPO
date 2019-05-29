@@ -5,16 +5,10 @@
  */
 package umg.analisisdesistemas1.com.modelo;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import umg.analisisdesistemas1.com.objeto.Conexion;
 import umg.analisisdesistemas1.com.objeto.infoEmpleado;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

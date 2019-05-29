@@ -22,19 +22,20 @@ import umg.analisisdesistemas1.com.modelo.ModeloActivo;
 public class ControladorBajaActivo extends HttpServlet {
 
     private ModeloActivo modeloActivo = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloActivo = new ModeloActivo(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,7 +54,7 @@ public class ControladorBajaActivo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorBajaActivo</title>");            
+            out.println("<title>Servlet ControladorBajaActivo</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorBajaActivo at " + request.getContextPath() + "</h1>");
@@ -92,20 +93,20 @@ public class ControladorBajaActivo extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
         int opcion;
-        int codigo_activo; 
+        int codigo_activo;
         int motivo_baja;
         String descripcion = "";
         mensaje = "";
-        
-        try{
+
+        try {
             opcion = 1;
-            codigo_activo = Integer.parseInt (request.getParameter("cbnombreactivo"));
+            codigo_activo = Integer.parseInt(request.getParameter("cbnombreactivo"));
             motivo_baja = Integer.parseInt(request.getParameter("cbMotivoBaja"));
             descripcion = request.getParameter("tadescripcionbaja");
-            
+
             mensaje = modeloActivo.mensajeBajaActivo(opcion, codigo_activo, motivo_baja, descripcion);
-                
-            if(mensaje.equals("OK")){   //si el mensaje es 
+
+            if (mensaje.equals("OK")) {   //si el mensaje es
                 /*Enviamos un mensaje de que se guardo el activo, para esto usamos sweetalert
                 enviando desde este servlet el script que contiene jquery y sweetalert, para mostrar un bonti
                 mensaje de alerta en la página JSP*/
@@ -122,7 +123,7 @@ public class ControladorBajaActivo extends HttpServlet {
                 pw.println("</script>");
                 RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                 rd.include(request, response);
-            } else if(mensaje.equals("FALLO")){     //si el mensaje es de fallo
+            } else if (mensaje.equals("FALLO")) {     //si el mensaje es de fallo
                 pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                 pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                 pw.println("<script>");
@@ -136,8 +137,8 @@ public class ControladorBajaActivo extends HttpServlet {
                 pw.println("</script>");
                 RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                 rd.include(request, response);
-            } 
-        } catch(Exception e){
+            }
+        } catch (Exception e) {
             pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
             pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
             pw.println("<script>");
@@ -152,7 +153,7 @@ public class ControladorBajaActivo extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
             rd.include(request, response);
         } finally {
-            
+
         }
     }
 

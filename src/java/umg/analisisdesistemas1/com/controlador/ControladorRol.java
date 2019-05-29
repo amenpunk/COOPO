@@ -24,7 +24,7 @@ import umg.analisisdesistemas1.com.objeto.Rol;
 public class ControladorRol extends HttpServlet {
 
     private ModeloRol modeloRol = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
 
     @Override

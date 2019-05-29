@@ -23,17 +23,18 @@ import umg.analisisdesistemas1.com.objeto.CalculoDepreciacion;
  * @author DELLMAYORGA
  */
 public class ControladorCalculosContables extends HttpServlet {
+
     private ModeloCalculoContable modeloCalculoContable = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloCalculoContable = new ModeloCalculoContable(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -54,26 +55,25 @@ public class ControladorCalculosContables extends HttpServlet {
         String referencia_activo = "";
         float valor_adquisicion = 0;
         int opcion = 0;
-        
-        
+
         try {
             opcion = Integer.valueOf(request.getParameter("opcion"));   //variable que viene del jsp javascript
             referencia_activo = String.valueOf(request.getParameter("referencia_activo"));  //variable que viene del jsp javascript
             valor_adquisicion = Float.valueOf(request.getParameter("valor_adquisicion"));   //variable que viene del jsp javascript
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            
-            if(opcion == 1){    //calculos de depreciaciones
+
+            if (opcion == 1) {    //calculos de depreciaciones
                 ArrayList<CalculoDepreciacion> listaCalculosDepreciacion = new ArrayList<CalculoDepreciacion>();
                 listaCalculosDepreciacion = modeloCalculoContable.obtenerCalculoDepreciacion(referencia_activo, valor_adquisicion);
                 Gson gsonGastos = new Gson();
                 jsonDepreciacion = gsonGastos.toJson(listaCalculosDepreciacion);
                 response.getWriter().write(jsonDepreciacion);
             }
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

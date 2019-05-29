@@ -27,21 +27,22 @@ import umg.analisisdesistemas1.com.objeto.SubMenu;
  * @author DELLMAYORGA
  */
 public class ControladorUsuario extends HttpServlet {
+
     private ModeloUsuario modeloUsuario = null;
     private ModeloMenu modeloMenu = null;
     private ModeloCuentaContable modeloCuentaContable = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloUsuario = new ModeloUsuario(ds);
             modeloMenu = new ModeloMenu(ds);
             modeloCuentaContable = new ModeloCuentaContable(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -63,7 +64,7 @@ public class ControladorUsuario extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorUsuario</title>");            
+            out.println("<title>Servlet ControladorUsuario</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorUsuario at " + request.getContextPath() + "</h1>");
@@ -103,17 +104,17 @@ public class ControladorUsuario extends HttpServlet {
         ArrayList<SubMenu> listaSuMenuProcesos = new ArrayList<SubMenu>();
         ArrayList<SubMenu> listaSuMenuReportes = new ArrayList<SubMenu>();
         ArrayList<SubMenu> listaSuMenuMantenimientos = new ArrayList<SubMenu>();
-        
-        if(!request.getParameter("txtUsuario").toString().equals("") && !request.getParameter("txtPassword").toString().equals("")){  //valido que se hallan rellenado los campos de usuario y contraseña
+
+        if (!request.getParameter("txtUsuario").toString().equals("") && !request.getParameter("txtPassword").toString().equals("")) {  //valido que se hallan rellenado los campos de usuario y contraseña
             String usuario = request.getParameter("txtUsuario");
             String password = request.getParameter("txtPassword");
-            
-            try{
+
+            try {
                 mensaje = modeloUsuario.mensajeLogueo(usuario, password);
 
-                if(mensaje.equals("IDENTIFICADO")){
+                if (mensaje.equals("IDENTIFICADO")) {
                     //creo una sesion que se va a llamar sesUsuario
-                    request.getSession().setAttribute("sesUsuario", usuario); 
+                    request.getSession().setAttribute("sesUsuario", usuario);
                     //obtengo la lista opciones del menu al que tiene acceso el usuario.
                     listaMenu = modeloMenu.obtenerListaMenu(usuario);
                     //obtengo la lista de submenu del menu al que tiene acceso el usuario.
@@ -130,20 +131,20 @@ public class ControladorUsuario extends HttpServlet {
                     request.setAttribute("LISTASUBMENUPROCESOS", listaSuMenuProcesos);
                     request.setAttribute("LISTASUBMENUREPORTES", listaSuMenuReportes);
                     request.setAttribute("LISTASUBMENUMANTENIMIENTOS", listaSuMenuMantenimientos);
-                    
+
                     RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                     rd.forward(request, response);
-                } else if(mensaje.equals("NO_IDENTIFICADO")){
+                } else if (mensaje.equals("NO_IDENTIFICADO")) {
                     response.setContentType("text/html");
                     request.setAttribute("mensaje", "Usuario o contraseña invalidos.");
                     RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Login.jsp");
                     rd.include(request, response);
                     //rd.forward(request, response);
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Mensaje de error:" + e.getMessage());
             }
-        } else{
+        } else {
             request.setAttribute("mensaje", "¡Debe ingresar su usuario y contraseña!");
             RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Login.jsp");
             rd.forward(request, response);

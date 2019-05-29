@@ -22,7 +22,7 @@ import umg.analisisdesistemas1.com.modelo.ModeloAf_Rol;
 public class ControladorAF_ROL extends HttpServlet {
 
     private ModeloAf_Rol modelo_rol = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
 

@@ -23,17 +23,18 @@ import umg.analisisdesistemas1.com.objeto.DatosEmpleado;
  * @author DELLMAYORGA
  */
 public class ControladorDatosInstitucionalesEmpleado extends HttpServlet {
+
     private ModeloDatosEmpleado modeloDatosEmpleado = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloDatosEmpleado = new ModeloDatosEmpleado(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -55,7 +56,7 @@ public class ControladorDatosInstitucionalesEmpleado extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorDatosInstitucionalesEmpleado</title>");            
+            out.println("<title>Servlet ControladorDatosInstitucionalesEmpleado</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorDatosInstitucionalesEmpleado at " + request.getContextPath() + "</h1>");
@@ -80,21 +81,21 @@ public class ControladorDatosInstitucionalesEmpleado extends HttpServlet {
         //processRequest(request, response);
         String datos_empleado = "";
         int codigo_empleado = 0;
-        
-        try{
+
+        try {
             codigo_empleado = Integer.valueOf(request.getParameter("codigo_empleado"));
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            
+
             ArrayList<DatosEmpleado> listaDatosEmpleado = new ArrayList<DatosEmpleado>();
             listaDatosEmpleado = modeloDatosEmpleado.obtenerDatosResponsableActivo(codigo_empleado);
             Gson gson = new Gson();
             datos_empleado = gson.toJson(listaDatosEmpleado);
             response.getWriter().write(datos_empleado);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

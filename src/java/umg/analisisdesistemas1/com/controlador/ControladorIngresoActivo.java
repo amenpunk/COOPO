@@ -20,17 +20,18 @@ import umg.analisisdesistemas1.com.modelo.ModeloIngresoActivo;
  * @author DELLMAYORGA
  */
 public class ControladorIngresoActivo extends HttpServlet {
+
     private ModeloIngresoActivo modeloIngresoActivo = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloIngresoActivo = new ModeloIngresoActivo(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -52,7 +53,7 @@ public class ControladorIngresoActivo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorIngresoActivo</title>");            
+            out.println("<title>Servlet ControladorIngresoActivo</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorIngresoActivo at " + request.getContextPath() + "</h1>");
@@ -94,7 +95,7 @@ public class ControladorIngresoActivo extends HttpServlet {
         String nombre_activo = "";
         String descripcion = "";
         String cuenta_activo = "";
-        String cuenta_gasto  = "";
+        String cuenta_gasto = "";
         String cuenta_depre_acumulada = "";
         int cod_empleado = 0;
         String fec_adquisicion = "";
@@ -112,14 +113,14 @@ public class ControladorIngresoActivo extends HttpServlet {
         int ubicacion = 0;
         int cod_proveedor = 0;
         mensaje = "";
-        
-        try{
-            if(!request.getParameter("txtCodigoActivo").toString().equals("")){ //valido que venga lleno el codigo de activo
+
+        try {
+            if (!request.getParameter("txtCodigoActivo").toString().equals("")) { //valido que venga lleno el codigo de activo
                 cod_clasificacion = request.getParameter("txtCodigoActivo");
                 nombre_activo = request.getParameter("txtDescripcionCorta");
                 descripcion = request.getParameter("taDescripcionLarga");
                 cuenta_activo = request.getParameter("cbCuentasActivos");
-                cuenta_gasto  = request.getParameter("cbCuentasGasto");
+                cuenta_gasto = request.getParameter("cbCuentasGasto");
                 cuenta_depre_acumulada = request.getParameter("txtRefDepreAcumulada");
                 cod_empleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
                 fec_adquisicion = request.getParameter("dtFechaAdquisicion");
@@ -138,8 +139,8 @@ public class ControladorIngresoActivo extends HttpServlet {
                 cod_proveedor = Integer.parseInt(request.getParameter("cbProveedor"));
 
                 mensaje = modeloIngresoActivo.obtenerMensajeIngresoActivo(cod_clasificacion, nombre_activo, descripcion, cuenta_activo, cuenta_gasto, cuenta_depre_acumulada, cod_empleado, fec_adquisicion, valor_adquisicion, fec_inicio_depre, porc_depre, valor_inicial_libros, depre_mensual, depre_anual, factura, monto_factura, observaciones, estado, departamento, ubicacion, cod_proveedor);
-                
-                if(mensaje.equals("OK")){   //si el mensaje es 
+
+                if (mensaje.equals("OK")) {   //si el mensaje es
                     /*Enviamos un mensaje de que se guardo el activo, para esto usamos sweetalert
                     enviando desde este servlet el script que contiene jquery y sweetalert, para mostrar un bonti
                     mensaje de alerta en la página JSP*/
@@ -156,7 +157,7 @@ public class ControladorIngresoActivo extends HttpServlet {
                     pw.println("</script>");
                     RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                     rd.include(request, response);
-                } else if(mensaje.equals("FALLO")){     //si el mensaje es de fallo
+                } else if (mensaje.equals("FALLO")) {     //si el mensaje es de fallo
                     pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                     pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                     pw.println("<script>");
@@ -170,7 +171,7 @@ public class ControladorIngresoActivo extends HttpServlet {
                     pw.println("</script>");
                     RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
                     rd.include(request, response);
-                } else if(mensaje.equals("REPETIDO")){
+                } else if (mensaje.equals("REPETIDO")) {
                     pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                     pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                     pw.println("<script>");
@@ -186,7 +187,7 @@ public class ControladorIngresoActivo extends HttpServlet {
                     rd.include(request, response);
                 }
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
             pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
             pw.println("<script>");
@@ -201,7 +202,7 @@ public class ControladorIngresoActivo extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
             rd.include(request, response);
         } finally {
-            
+
         }
     }
 

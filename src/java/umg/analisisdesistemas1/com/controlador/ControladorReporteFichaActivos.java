@@ -36,16 +36,17 @@ import umg.analisisdesistemas1.com.modelo.ModeloReporte;
  * @author DELLMAYORGA
  */
 public class ControladorReporteFichaActivos extends HttpServlet {
+
     private ModeloReporte modeloReporte = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String otro = "";
-    
+
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloReporte = new ModeloReporte(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -68,7 +69,7 @@ public class ControladorReporteFichaActivos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorReporte</title>");            
+            out.println("<title>Servlet ControladorReporte</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorReporte at " + request.getContextPath() + "</h1>");
@@ -116,39 +117,39 @@ public class ControladorReporteFichaActivos extends HttpServlet {
         String factura = null;
         String codigo_empleado = null;
         String mensaje = null;
-        
-        try{
-            if(request.getParameter("txtCodigoActivo") != null && !request.getParameter("txtCodigoActivo").toString().equals("")){
+
+        try {
+            if (request.getParameter("txtCodigoActivo") != null && !request.getParameter("txtCodigoActivo").toString().equals("")) {
                 codigo_activo = request.getParameter("txtCodigoActivo");
             }
-            if(request.getParameter("txtDescripcionCorta") != null && !request.getParameter("txtDescripcionCorta").toString().equals("")){
+            if (request.getParameter("txtDescripcionCorta") != null && !request.getParameter("txtDescripcionCorta").toString().equals("")) {
                 descripcion_corta = request.getParameter("txtDescripcionCorta");
             }
-            if(request.getParameter("cbCuentasActivos") != null && !request.getParameter("cbCuentasActivos").toString().equals("")){
+            if (request.getParameter("cbCuentasActivos") != null && !request.getParameter("cbCuentasActivos").toString().equals("")) {
                 referencia_activo = request.getParameter("cbCuentasActivos");
             }
-            if(request.getParameter("dtFechaAdquisicionIni") != null && !request.getParameter("dtFechaAdquisicionIni").toString().equals("")){
+            if (request.getParameter("dtFechaAdquisicionIni") != null && !request.getParameter("dtFechaAdquisicionIni").toString().equals("")) {
                 String fechaI = request.getParameter("dtFechaAdquisicionIni");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  //este es el formato que me devuelve el datepicker
                 SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd"); //este es el formato que quiero obtener y guardar en la BDD
                 fecha_inicial = sdf2.format(sdf.parse(fechaI));
             }
-            if(request.getParameter("dtFechaAdquisicionFin") != null && !request.getParameter("dtFechaAdquisicionFin").toString().equals("")){
+            if (request.getParameter("dtFechaAdquisicionFin") != null && !request.getParameter("dtFechaAdquisicionFin").toString().equals("")) {
                 String fechaF = request.getParameter("dtFechaAdquisicionFin");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  //este es el formato que me devuelve el datepicker
                 SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd"); //este es el formato que quiero obtener y guardar en la BDD
                 fecha_final = sdf2.format(sdf.parse(fechaF));
             }
-            if(request.getParameter("cbProveedor") != null && !request.getParameter("cbProveedor").toString().equals("")){
+            if (request.getParameter("cbProveedor") != null && !request.getParameter("cbProveedor").toString().equals("")) {
                 codigo_proveedor = request.getParameter("cbProveedor");
             }
-            if(request.getParameter("txtFactura") != null && !request.getParameter("txtFactura").toString().equals("")){
+            if (request.getParameter("txtFactura") != null && !request.getParameter("txtFactura").toString().equals("")) {
                 factura = request.getParameter("txtFactura");
             }
-            if(request.getParameter("cbResponsable") != null && !request.getParameter("cbResponsable").toString().equals("")){
+            if (request.getParameter("cbResponsable") != null && !request.getParameter("cbResponsable").toString().equals("")) {
                 codigo_empleado = request.getParameter("cbResponsable");
             }
-            
+
             String path = getServletContext().getRealPath("//");
             disenio = JRXmlLoader.load(path + "/reportes/rptFichaActivosFijos.jrxml");
             reporte = JasperCompileManager.compileReport(disenio);
@@ -167,7 +168,7 @@ public class ControladorReporteFichaActivos extends HttpServlet {
             outStream.write(byteStream, 0, byteStream.length);
             outStream.flush();
             outStream.close();
-        } catch(Exception e){
+        } catch (Exception e) {
             mensaje = e.getMessage();
         }
     }

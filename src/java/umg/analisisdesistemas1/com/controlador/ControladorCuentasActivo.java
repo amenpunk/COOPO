@@ -27,20 +27,22 @@ import umg.analisisdesistemas1.com.objeto.CuentaContable;
  * @author DELLMAYORGA
  */
 public class ControladorCuentasActivo extends HttpServlet {
+
     private ModeloCuentaContable modeloCuentaContable = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloCuentaContable = new ModeloCuentaContable(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,7 +53,7 @@ public class ControladorCuentasActivo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,23 +70,23 @@ public class ControladorCuentasActivo extends HttpServlet {
         //processRequest(request, response);
         int tipo_cuenta = 0;    //1. activos, 2. pasivos, 3. gastos
         String listaActivos = "";
-        
-        try{
+
+        try {
             tipo_cuenta = Integer.valueOf(request.getParameter("tipo_cuenta"));
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             //Hago una eleccion de lo que va a enviar el controlador al javascript
-            if(tipo_cuenta == 1){   //si el tipo de cuenta es activo
+            if (tipo_cuenta == 1) {   //si el tipo de cuenta es activo
                 ArrayList<CuentaContable> listaCuentaActivos = new ArrayList<CuentaContable>();
                 listaCuentaActivos = modeloCuentaContable.obtenerListaCuentaContable(tipo_cuenta);    //obtengo la lista de cuenta de activos
                 Gson gsonActivos = new Gson();
                 listaActivos = gsonActivos.toJson(listaCuentaActivos);
                 response.getWriter().write(listaActivos);
             }
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }
@@ -100,7 +102,7 @@ public class ControladorCuentasActivo extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 
     /**

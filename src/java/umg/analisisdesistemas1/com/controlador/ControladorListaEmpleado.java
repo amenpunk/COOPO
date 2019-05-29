@@ -24,7 +24,7 @@ import umg.analisisdesistemas1.com.objeto.Empleado;
 public class ControladorListaEmpleado extends HttpServlet {
 
     private ModeloListaEmpleado modeloListaEmpleado = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
 
     @Override

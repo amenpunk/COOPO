@@ -23,17 +23,18 @@ import umg.analisisdesistemas1.com.objeto.CuentaContable;
  * @author DELLMAYORGA
  */
 public class ControladorCuentasGasto extends HttpServlet {
+
     private ModeloCuentaContable modeloCuentaContable = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloCuentaContable = new ModeloCuentaContable(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
@@ -51,23 +52,23 @@ public class ControladorCuentasGasto extends HttpServlet {
         //response.setContentType("text/html;charset=UTF-8");
         int tipo_cuenta = 0;    //1. activos, 2. pasivos, 3. gastos
         String listaGastos = "";
-        
-        try{
+
+        try {
             tipo_cuenta = Integer.valueOf(request.getParameter("tipo_cuenta"));
-            
+
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             //Hago una eleccion de lo que va a enviar el controlador al javascript
-            if(tipo_cuenta == 3){   //si el tipo de cuenta es gasto
+            if (tipo_cuenta == 3) {   //si el tipo de cuenta es gasto
                 ArrayList<CuentaContable> listaCuentaGastos = new ArrayList<CuentaContable>();
                 listaCuentaGastos = modeloCuentaContable.obtenerListaCuentaContable(tipo_cuenta);     //obtengo la lista de cuenta de gastos
                 Gson gsonGastos = new Gson();
                 listaGastos = gsonGastos.toJson(listaCuentaGastos);
                 response.getWriter().write(listaGastos);
             }
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

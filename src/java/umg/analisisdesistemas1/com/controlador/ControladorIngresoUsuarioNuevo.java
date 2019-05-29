@@ -22,7 +22,7 @@ import umg.analisisdesistemas1.com.modelo.ModeloNuevoUsuario;
 public class ControladorIngresoUsuarioNuevo extends HttpServlet {
 
     private ModeloNuevoUsuario NuevoUsuario = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
 

@@ -7,10 +7,13 @@ package umg.analisisdesistemas1.com.modelo;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 
 import umg.analisisdesistemas1.com.objeto.Rol;
 
@@ -18,27 +21,34 @@ import umg.analisisdesistemas1.com.objeto.Rol;
  *
  * @author Neon
  */
-public class ModeloRol {
+public class ModeloRol extends Conexion {
 
     private DataSource ds;
     private Rol rol;
     private ArrayList<Rol> ListaRol = null;
 
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
+
     public ModeloRol(DataSource ds) {
         this.ds = ds;
     }
 
+    public ModeloRol() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
     public ArrayList<Rol> obtenerRol() throws Exception {
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
         ResultSet rs = null;
         ListaRol = new ArrayList<Rol>();
         try {
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{call sp_obtener_rol}";
-            cs = conexion.prepareCall(sql);
+            PreparedStatement cs = conn.prepareStatement(sql);
+
+            //cs = conexion.prepareCall(sql);
             cs.execute();
             rs = cs.getResultSet();
             while (rs.next()) {

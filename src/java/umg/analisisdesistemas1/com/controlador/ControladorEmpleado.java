@@ -24,20 +24,22 @@ import umg.analisisdesistemas1.com.objeto.Empleado;
  * @author DELLMAYORGA
  */
 public class ControladorEmpleado extends HttpServlet {
+
     private ModeloEmpleado modeloEmpleado = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloEmpleado = new ModeloEmpleado(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,18 +54,18 @@ public class ControladorEmpleado extends HttpServlet {
         int opcion = 0;
         String cadenaJSON = "";
         ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
-        
+
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        try{
+        try {
             opcion = Integer.valueOf(request.getParameter("opcion"));
             listaEmpleados = modeloEmpleado.obtenerListaEmpleado(opcion);    //obtengo la lista de departamentos
             Gson gson = new Gson();
             cadenaJSON = gson.toJson(listaEmpleados);
             response.getWriter().write(cadenaJSON);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }

@@ -22,37 +22,38 @@ import umg.analisisdesistemas1.com.objeto.Activo;
  * @author Richard
  */
 public class ControladorActivosAlta extends HttpServlet {
- private ModeloActivo modeloActivo = null;
-    @javax.annotation.Resource(name = "pool_conexiones")
+
+    private ModeloActivo modeloActivo = null;
+    //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
-    
+
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        try{
+        try {
             modeloActivo = new ModeloActivo(ds);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int opcion = 1;
         String cadenaJSON = "";
         ArrayList<Activo> listaActivosAlta = new ArrayList<Activo>();
-        
+
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        try{
+        try {
             opcion = Integer.valueOf(request.getParameter("opcion"));
             listaActivosAlta = modeloActivo.obtenerListaActivoAlta(opcion);
             Gson gson = new Gson();
             cadenaJSON = gson.toJson(listaActivosAlta);
             response.getWriter().write(cadenaJSON);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         } finally {
             out.flush();
         }
