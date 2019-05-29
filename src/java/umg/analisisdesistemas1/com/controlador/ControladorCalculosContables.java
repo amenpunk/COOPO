@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import umg.analisisdesistemas1.com.modelo.ModeloCalculoContable;
 import umg.analisisdesistemas1.com.objeto.CalculoDepreciacion;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 
 /**
  *
@@ -28,12 +29,13 @@ public class ControladorCalculosContables extends HttpServlet {
     //@javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
     private String mensaje = "";
+    Conexion con = new Conexion();
 
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloCalculoContable = new ModeloCalculoContable(ds);
+            modeloCalculoContable = new ModeloCalculoContable(con);
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

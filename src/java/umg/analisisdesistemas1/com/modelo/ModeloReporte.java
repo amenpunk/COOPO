@@ -16,24 +16,25 @@ import javax.sql.DataSource;
  * @author DELLMAYORGA
  */
 public class ModeloReporte {
+
     private DataSource ds;
-    
+
     public ModeloReporte(DataSource ds) {
         this.ds = ds;
     }
-    
-    public Connection obtenerConexion(){
+
+    public Connection obtenerConexion() {
         Connection conexion = null;
         Statement st = null;
         CallableStatement cs = null;
         ResultSet rs = null;
-        
-        try{
+
+        try {
             conexion = ds.getConnection();
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
-        
+
         return conexion;
     }
 }

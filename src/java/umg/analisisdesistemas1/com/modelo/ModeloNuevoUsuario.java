@@ -11,37 +11,51 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.sql.DataSource;
 import java.sql.Types;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 
 /**
  *
  * @author Neon
  */
-public class ModeloNuevoUsuario {
+public class ModeloNuevoUsuario extends Conexion {
 
     private DataSource ds;
     private String mensaje = "";
+
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
 
     public ModeloNuevoUsuario(DataSource ds) {
         this.ds = ds;
     }
 
+    public ModeloNuevoUsuario() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
     public String ingresarUsuario(String usu_user, String usu_password, int emp_codigo, int rol_codigo) {
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
+
         ResultSet rs = null;
         try {
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             String sql = "{call sp_ingresar_nuevo_usuario(?, ?, ?, ?, ?)}";
-            cs = conexion.prepareCall(sql);
+            PreparedStatement cs = conn.prepareStatement(sql);
+            //cs = conexion.prepareCall(sql);
             cs.setString(1, usu_user);
             cs.setString(2, usu_password);
             cs.setInt(3, emp_codigo);
             cs.setInt(4, rol_codigo);
 
-            cs.registerOutParameter(5, Types.VARCHAR);
+            //cs.registerOutParameter(5, Types.VARCHAR);
             cs.execute();
-            mensaje = cs.getString(5);
+            while (rs.next()) {
+                mensaje = rs.getString("mensaje");
+            }
+
+            //mensaje = cs.getString(5);
         } catch (Exception e) {
 
         }

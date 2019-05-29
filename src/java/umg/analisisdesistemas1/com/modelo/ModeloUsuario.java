@@ -11,44 +11,59 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 
 /**
  *
  * @author DELLMAYORGA
  */
-public class ModeloUsuario {
+public class ModeloUsuario extends Conexion {
+
     private DataSource ds;
-    
-    public ModeloUsuario(DataSource ds) {
-        this.ds = ds;
+
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
+
+    public ModeloUsuario(Conexion conc) {
+        this.conc = conc;
     }
-    
+
+    public ModeloUsuario() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
     public String mensajeLogueo(String usuario, String password) throws Exception {
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
+
         ResultSet rs = null;
         String mensaje = "";
-        
-        try{
+
+        try {
             //1 Primero, establezco la conexion
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{call sp_logueo_usuario(?, ?, ?)}";
-            cs = conexion.prepareCall(sql);
+            //cs = conexion.prepareCall(sql);
+            PreparedStatement cs = conn.prepareStatement(sql);
             //3 setear los parametros de entrada o los parametros que pide la funcion
             cs.setString(1, usuario);
             cs.setString(2, password);
             //4 registro el parametro de salida
-            cs.registerOutParameter(3, Types.VARCHAR);
+            //cs.registerOutParameter(3, Types.VARCHAR);
             //5 ejecutar la consulta
             cs.execute();
+            while (rs.next()) {
+                mensaje = rs.getString("mensaje");
+            }
+
             //6 obtener el valor que devuelve la funcion y asignarse a una variable
-            mensaje = cs.getString(3);
-        } catch(Exception e){
+            //mensaje = cs.getString(3);
+        } catch (Exception e) {
             System.out.println("Mensaje de error: " + e.getMessage());
         }
-        
+
         return mensaje;
     }
 }

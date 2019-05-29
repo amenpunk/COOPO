@@ -30,8 +30,8 @@ public class ModeloCalculoContable extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloCalculoContable(DataSource ds) {
-        this.ds = ds;
+    public ModeloCalculoContable(Conexion conc) {
+        this.conc = conc;
     }
 
     public ModeloCalculoContable() throws SQLException {

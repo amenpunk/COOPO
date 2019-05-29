@@ -50,7 +50,7 @@ public class ModeloCodigoActivo extends Conexion {
             cs.setString(2, codigo_referencia);
             cs.execute();
             while (rs.next()) {
-                codigo_activo = rs.getString(1);
+                codigo_activo = rs.getString("codigo_activo");
             }
             //5 Asigno el valor de la consulta a la variable
 

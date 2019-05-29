@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import umg.analisisdesistemas1.com.modelo.ModeloCuentaContable;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 import umg.analisisdesistemas1.com.objeto.CuentaContable;
 
 /**
@@ -24,6 +25,7 @@ import umg.analisisdesistemas1.com.objeto.CuentaContable;
  */
 public class ControladorCuentasPasivo extends HttpServlet {
 
+    private Conexion con = new Conexion();
     private ModeloCuentaContable modeloCuentaContable = null;
     // @javax.annotation.Resource(name = "pool_conexiones")
     private DataSource ds;
@@ -33,7 +35,7 @@ public class ControladorCuentasPasivo extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloCuentaContable = new ModeloCuentaContable(ds);
+            modeloCuentaContable = new ModeloCuentaContable(con);
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

@@ -12,31 +12,42 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import umg.analisisdesistemas1.com.objeto.Usuario;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 
 /**
  *
  * @author Neon
  */
-public class ModeloListaUsuarios {
+public class ModeloListaUsuarios extends Conexion {
 
     private DataSource ds;
     private Usuario usuario;
     private ArrayList<Usuario> ListaUsuarios = null;
 
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
+
     public ModeloListaUsuarios(DataSource ds) {
         this.ds = ds;
     }
 
+    public ModeloListaUsuarios() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
     public ArrayList<Usuario> ObtenerUsuarios() throws Exception {
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
+
         ResultSet rs = null;
         ListaUsuarios = new ArrayList<Usuario>();
         try {
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             String sql = "{call sp_obtener_lista_usuarios}";
-            cs = conexion.prepareCall(sql);
+            //cs = conexion.prepareCall(sql);
+            PreparedStatement cs = conn.prepareStatement(sql);
+
             //cs.setInt(1, cod);
             cs.execute();
             rs = cs.getResultSet();
