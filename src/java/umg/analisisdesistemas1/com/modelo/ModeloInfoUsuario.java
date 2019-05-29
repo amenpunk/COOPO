@@ -11,40 +11,65 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
+import umg.analisisdesistemas1.com.objeto.Conexion;
 import umg.analisisdesistemas1.com.objeto.infoEmpleado;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Neon
  */
-public class ModeloInfoUsuario {
+public class ModeloInfoUsuario extends Conexion {
 
     private DataSource ds;
     private infoEmpleado info;
     private ArrayList<infoEmpleado> listaInfo = null;
+    //public Conexion conc = new Conexion();
+    //Connection cnx = null;
+    public Conexion conc = new Conexion();
+    public Connection conn = conc.getConexion();
+    Statement st;
+    //public Connection conn = conc.getConexion();
 
     public ModeloInfoUsuario(DataSource ds) {
         this.ds = ds;
     }
 
+    public ModeloInfoUsuario() throws SQLException {
+        this.st = conn.createStatement();
+    }
+
     public ArrayList<infoEmpleado> obtenerInfo(int cod) throws Exception {
-        Connection conexion = null;
-        Statement st = null;
-        CallableStatement cs = null;
+
+        //Connection conexion = null;
+        //Statement st = null;
+        //CallableStatement cs = null;
         ResultSet rs = null;
+
         listaInfo = new ArrayList<infoEmpleado>();
         try {
+
+            //String connectionUrl = "jdbc:sqlserver://testcoopo.database.windows.net:1433;databaseName=ACTIVOS_FIJOS;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             //1 Primero, establezco la conexion
-            conexion = ds.getConnection();
+            //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{call sp_obtener_info_empleado(?)}";
-            cs = conexion.prepareCall(sql);
+            //ResultSet rs = st.executeQuery(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //cs = conc.prepareCall(sql);
             //3 setear los parametros de entrada o los parametros que pide la funcion
-            cs.setInt(1, cod);
+            ps.setInt(1, cod);
             //4 ejecutar la consulta
-            cs.execute();
+            ps.execute();
             //5 Guardo el valor devuelto por la DB en un ResultSet
-            rs = cs.getResultSet();
+            rs = ps.getResultSet();
             while (rs.next()) {
                 String nombre = rs.getString("emp_nombres");
                 String apellidos = rs.getString("emp_apellidos");
