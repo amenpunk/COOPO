@@ -34,14 +34,6 @@ public class ModeloActivo extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloActivo(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloActivo() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Activo> obtenerListaActivoAlta(int opcion) throws Exception {
         //Connection conexion = null;
         //Statement st = null;
@@ -50,6 +42,7 @@ public class ModeloActivo extends Conexion {
         listaActivoAlta = new ArrayList<Activo>();
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

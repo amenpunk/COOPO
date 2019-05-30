@@ -33,19 +33,12 @@ public class ModeloUsuarioRol extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloUsuarioRol(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloUsuarioRol() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Usuario> ObtenerUsuario(int cod) throws Exception {
 
         ResultSet rs = null;
         ListaUserRol = new ArrayList<Usuario>();
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             String sql = "{call sp_obtener_usuario (?)}";
             PreparedStatement cs = conn.prepareStatement(sql);

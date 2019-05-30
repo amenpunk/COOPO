@@ -30,19 +30,12 @@ public class ModeloListaUsuarios extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloListaUsuarios(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloListaUsuarios() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Usuario> ObtenerUsuarios() throws Exception {
 
         ResultSet rs = null;
         ListaUsuarios = new ArrayList<Usuario>();
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             String sql = "{call sp_obtener_lista_usuarios}";
             //cs = conexion.prepareCall(sql);

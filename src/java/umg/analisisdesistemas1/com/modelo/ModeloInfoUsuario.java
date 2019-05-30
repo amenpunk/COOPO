@@ -31,14 +31,6 @@ public class ModeloInfoUsuario extends Conexion {
     Statement st;
     //public Connection conn = conc.getConexion();
 
-    public ModeloInfoUsuario(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloInfoUsuario() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<infoEmpleado> obtenerInfo(int cod) throws Exception {
 
         //Connection conexion = null;
@@ -48,7 +40,7 @@ public class ModeloInfoUsuario extends Conexion {
 
         listaInfo = new ArrayList<infoEmpleado>();
         try {
-
+            st = conn.createStatement();
             //String connectionUrl = "jdbc:sqlserver://testcoopo.database.windows.net:1433;databaseName=ACTIVOS_FIJOS;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();

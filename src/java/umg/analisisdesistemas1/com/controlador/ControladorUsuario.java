@@ -31,7 +31,7 @@ public class ControladorUsuario extends HttpServlet {
 
     private ModeloUsuario modeloUsuario = null;
     private ModeloMenu modeloMenu = null;
-    private Conexion con = new Conexion();
+    //private Conexion con = new Conexion();
     private ModeloCuentaContable modeloCuentaContable = null;
     //@javax.annotation.Resource(name = "pool_conexiones")
     //private DataSource ds;
@@ -41,9 +41,9 @@ public class ControladorUsuario extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloUsuario = new ModeloUsuario(con);
-            modeloMenu = new ModeloMenu(con);
-            modeloCuentaContable = new ModeloCuentaContable(con);
+            modeloUsuario = new ModeloUsuario();
+            modeloMenu = new ModeloMenu();
+            modeloCuentaContable = new ModeloCuentaContable();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }
@@ -114,35 +114,28 @@ public class ControladorUsuario extends HttpServlet {
             try {
                 mensaje = modeloUsuario.mensajeLogueo(usuario, password);
 
-                if (mensaje.equals("IDENTIFICADO")) {
-                    //creo una sesion que se va a llamar sesUsuario
-                    request.getSession().setAttribute("sesUsuario", usuario);
-                    //obtengo la lista opciones del menu al que tiene acceso el usuario.
-                    listaMenu = modeloMenu.obtenerListaMenu(usuario);
-                    //obtengo la lista de submenu del menu al que tiene acceso el usuario.
-                    listaSuMenuProcesos = modeloMenu.obtenerListaSubMenu(usuario, 1);           //submenu procesos
-                    listaSuMenuReportes = modeloMenu.obtenerListaSubMenu(usuario, 2);           //submenu reportes
-                    listaSuMenuMantenimientos = modeloMenu.obtenerListaSubMenu(usuario, 3);     //submenu mantenimientos
-                    //guardo los arraylist en variables de sesion
-                    request.getSession().setAttribute("listaMenu", listaMenu);
-                    request.getSession().setAttribute("listaSubMenuProcesos", listaSuMenuProcesos);
-                    request.getSession().setAttribute("listaSubMenuReportes", listaSuMenuReportes);
-                    request.getSession().setAttribute("listaSubMenuMantenimientos", listaSuMenuMantenimientos);
-                    //agrego las listas de menu y submenu al request
-                    request.setAttribute("LISTAMENU", listaMenu);
-                    request.setAttribute("LISTASUBMENUPROCESOS", listaSuMenuProcesos);
-                    request.setAttribute("LISTASUBMENUREPORTES", listaSuMenuReportes);
-                    request.setAttribute("LISTASUBMENUMANTENIMIENTOS", listaSuMenuMantenimientos);
+                //creo una sesion que se va a llamar sesUsuario
+                request.getSession().setAttribute("sesUsuario", usuario);
+                //obtengo la lista opciones del menu al que tiene acceso el usuario.
+                listaMenu = modeloMenu.obtenerListaMenu(usuario);
+                //obtengo la lista de submenu del menu al que tiene acceso el usuario.
+                listaSuMenuProcesos = modeloMenu.obtenerListaSubMenu(usuario, 1);           //submenu procesos
+                listaSuMenuReportes = modeloMenu.obtenerListaSubMenu(usuario, 2);           //submenu reportes
+                listaSuMenuMantenimientos = modeloMenu.obtenerListaSubMenu(usuario, 3);     //submenu mantenimientos
+                //guardo los arraylist en variables de sesion
+                request.getSession().setAttribute("listaMenu", listaMenu);
+                request.getSession().setAttribute("listaSubMenuProcesos", listaSuMenuProcesos);
+                request.getSession().setAttribute("listaSubMenuReportes", listaSuMenuReportes);
+                request.getSession().setAttribute("listaSubMenuMantenimientos", listaSuMenuMantenimientos);
+                //agrego las listas de menu y submenu al request
+                request.setAttribute("LISTAMENU", listaMenu);
+                request.setAttribute("LISTASUBMENUPROCESOS", listaSuMenuProcesos);
+                request.setAttribute("LISTASUBMENUREPORTES", listaSuMenuReportes);
+                request.setAttribute("LISTASUBMENUMANTENIMIENTOS", listaSuMenuMantenimientos);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
-                    rd.forward(request, response);
-                } else if (mensaje.equals("NO_IDENTIFICADO")) {
-                    response.setContentType("text/html");
-                    request.setAttribute("mensaje", "Usuario o contraseña invalidos.");
-                    RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Login.jsp");
-                    rd.include(request, response);
-                    //rd.forward(request, response);
-                }
+                RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
+                rd.forward(request, response);
+
             } catch (Exception e) {
                 System.out.println("Mensaje de error:" + e.getMessage());
             }

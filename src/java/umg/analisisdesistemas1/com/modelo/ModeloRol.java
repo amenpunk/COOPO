@@ -31,18 +31,11 @@ public class ModeloRol extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloRol(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloRol() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Rol> obtenerRol() throws Exception {
         ResultSet rs = null;
         ListaRol = new ArrayList<Rol>();
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{call sp_obtener_rol}";

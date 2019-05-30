@@ -33,7 +33,7 @@ public class ControladorDatosInstitucionalesEmpleado extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloDatosEmpleado = new ModeloDatosEmpleado(ds);
+            modeloDatosEmpleado = new ModeloDatosEmpleado();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

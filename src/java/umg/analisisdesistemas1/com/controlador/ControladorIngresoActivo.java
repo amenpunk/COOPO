@@ -30,7 +30,7 @@ public class ControladorIngresoActivo extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloIngresoActivo = new ModeloIngresoActivo(ds);
+            modeloIngresoActivo = new ModeloIngresoActivo();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

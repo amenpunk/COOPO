@@ -32,20 +32,13 @@ public class ModeloDatosEmpleado extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloDatosEmpleado(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloDatosEmpleado() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<DatosEmpleado> obtenerDatosResponsableActivo(int codigo_empleado) {
 
         ResultSet rs = null;
         listaDatosEmpleado = new ArrayList<DatosEmpleado>();
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

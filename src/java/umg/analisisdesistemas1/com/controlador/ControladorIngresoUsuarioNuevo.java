@@ -30,7 +30,7 @@ public class ControladorIngresoUsuarioNuevo extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            NuevoUsuario = new ModeloNuevoUsuario(ds);
+            NuevoUsuario = new ModeloNuevoUsuario();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

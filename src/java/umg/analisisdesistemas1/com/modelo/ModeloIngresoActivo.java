@@ -28,14 +28,6 @@ public class ModeloIngresoActivo extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloIngresoActivo(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloIngresoActivo() throws Exception {
-        this.st = conn.createStatement();
-    }
-
     public String obtenerMensajeIngresoActivo(String cod_clasificacion, String nombre_activo, String descripcion,
             String cuenta_activo, String cuenta_gasto, String cuenta_depre_acumulada, int cod_empleado,
             String fec_adquisicion, float valor_adquisicion, String fec_inicio_depre, float porc_depre,
@@ -45,6 +37,7 @@ public class ModeloIngresoActivo extends Conexion {
         ResultSet rs = null;
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

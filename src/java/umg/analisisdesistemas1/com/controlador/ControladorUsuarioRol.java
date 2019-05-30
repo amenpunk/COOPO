@@ -31,7 +31,7 @@ public class ControladorUsuarioRol extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloUsuarioRol = new ModeloUsuarioRol(ds);
+            modeloUsuarioRol = new ModeloUsuarioRol();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

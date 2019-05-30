@@ -30,7 +30,7 @@ public class ControladorBajaActivo extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloActivo = new ModeloActivo(ds);
+            modeloActivo = new ModeloActivo();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

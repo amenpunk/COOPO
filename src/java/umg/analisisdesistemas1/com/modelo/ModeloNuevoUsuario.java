@@ -28,18 +28,11 @@ public class ModeloNuevoUsuario extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloNuevoUsuario(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloNuevoUsuario() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public String ingresarUsuario(String usu_user, String usu_password, int emp_codigo, int rol_codigo) {
 
         ResultSet rs = null;
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             String sql = "{call sp_ingresar_nuevo_usuario(?, ?, ?, ?, ?)}";
             PreparedStatement cs = conn.prepareStatement(sql);

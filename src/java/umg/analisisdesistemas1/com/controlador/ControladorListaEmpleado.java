@@ -31,7 +31,7 @@ public class ControladorListaEmpleado extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloListaEmpleado = new ModeloListaEmpleado(ds);
+            modeloListaEmpleado = new ModeloListaEmpleado();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

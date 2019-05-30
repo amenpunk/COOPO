@@ -25,19 +25,12 @@ public class ModeloCodigoActivo extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloCodigoActivo(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloCodigoActivo() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public String obtenerCodigoActivo(String codigo_referencia) {
 
         ResultSet rs = null;
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

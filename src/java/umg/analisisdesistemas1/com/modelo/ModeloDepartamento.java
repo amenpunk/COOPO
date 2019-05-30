@@ -30,20 +30,13 @@ public class ModeloDepartamento extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloDepartamento(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloDepartamento() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Departamento> obtenerListaDepartamento(int codigo_compania) throws Exception {
 
         ResultSet rs = null;
         listaDepartamento = new ArrayList<Departamento>();
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             // conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

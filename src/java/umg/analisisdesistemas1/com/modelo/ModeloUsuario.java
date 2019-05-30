@@ -27,20 +27,13 @@ public class ModeloUsuario extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloUsuario(Conexion conc) {
-        this.conc = conc;
-    }
-
-    public ModeloUsuario() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public String mensajeLogueo(String usuario, String password) throws Exception {
 
         ResultSet rs = null;
         String mensaje = "";
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
@@ -55,7 +48,7 @@ public class ModeloUsuario extends Conexion {
             //5 ejecutar la consulta
             cs.execute();
             while (rs.next()) {
-                mensaje = rs.getString("mensaje");
+                mensaje = rs.getString(3);
             }
 
             //6 obtener el valor que devuelve la funcion y asignarse a una variable

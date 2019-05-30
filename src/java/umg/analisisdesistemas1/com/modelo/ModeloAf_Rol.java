@@ -29,19 +29,12 @@ public class ModeloAf_Rol extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloAf_Rol(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloAf_Rol() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public String ingresarRol(String nombre) throws Exception {
 
         ResultSet rs = null;
 
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
             String sql = "{call sp_ingresar_rol(?,?)}";

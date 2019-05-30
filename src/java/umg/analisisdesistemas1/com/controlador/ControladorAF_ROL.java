@@ -30,7 +30,7 @@ public class ControladorAF_ROL extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modelo_rol = new ModeloAf_Rol(ds);
+            modelo_rol = new ModeloAf_Rol();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

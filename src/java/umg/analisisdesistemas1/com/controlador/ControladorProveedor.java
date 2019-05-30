@@ -33,7 +33,7 @@ public class ControladorProveedor extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloProveedor = new ModeloProveedor(ds);
+            modeloProveedor = new ModeloProveedor();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

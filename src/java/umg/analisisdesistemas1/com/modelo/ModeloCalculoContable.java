@@ -30,20 +30,13 @@ public class ModeloCalculoContable extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloCalculoContable(Conexion conc) {
-        this.conc = conc;
-    }
-
-    public ModeloCalculoContable() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<CalculoDepreciacion> obtenerCalculoDepreciacion(String referencia_activo, float valor_adquisicion) throws Exception {
 
         ResultSet rs = null;
         listaCalculoDepreciacion = new ArrayList<CalculoDepreciacion>();
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

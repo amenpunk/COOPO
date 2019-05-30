@@ -30,20 +30,13 @@ public class ModeloUsuarioAct extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloUsuarioAct(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloUsuarioAct() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Usuario> ActualizarUsuario() throws Exception {
 
         ResultSet rs = null;
         ListaAct = new ArrayList<Usuario>();
 
         try {
+            st = conn.createStatement();
             //conexion = ds.getConnection();
             String sql = "{call sp_actualizar_usuario (?)}";
 

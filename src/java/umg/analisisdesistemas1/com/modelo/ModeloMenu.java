@@ -34,15 +34,6 @@ public class ModeloMenu extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloMenu(Conexion conc) {
-
-        this.conc = conc;
-    }
-
-    public ModeloMenu() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Menu> obtenerListaMenu(String usuario) throws Exception {
 
         listaMenu = new ArrayList<Menu>();
@@ -50,6 +41,7 @@ public class ModeloMenu extends Conexion {
         String mensaje = "";
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado

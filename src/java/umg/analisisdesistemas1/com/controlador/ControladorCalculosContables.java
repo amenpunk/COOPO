@@ -35,7 +35,7 @@ public class ControladorCalculosContables extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloCalculoContable = new ModeloCalculoContable(con);
+            modeloCalculoContable = new ModeloCalculoContable();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

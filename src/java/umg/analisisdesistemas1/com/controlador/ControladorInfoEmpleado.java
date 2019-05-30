@@ -33,7 +33,7 @@ public class ControladorInfoEmpleado extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         try {
-            modeloinfoUsuario = new ModeloInfoUsuario(ds);
+            modeloinfoUsuario = new ModeloInfoUsuario();
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

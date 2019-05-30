@@ -30,20 +30,13 @@ public class ModeloProveedor extends Conexion {
     public Connection conn = conc.getConexion();
     Statement st;
 
-    public ModeloProveedor(DataSource ds) {
-        this.ds = ds;
-    }
-
-    public ModeloProveedor() throws SQLException {
-        this.st = conn.createStatement();
-    }
-
     public ArrayList<Proveedor> obtenerListaProveedor(int opcion) throws Exception {
 
         ResultSet rs = null;
         listaProveedor = new ArrayList<Proveedor>();
 
         try {
+            st = conn.createStatement();
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
