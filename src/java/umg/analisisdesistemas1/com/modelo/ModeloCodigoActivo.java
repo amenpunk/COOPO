@@ -34,7 +34,7 @@ public class ModeloCodigoActivo extends Conexion {
             //1 Primero, establezco la conexion
             //conexion = ds.getConnection();
             //2 Crear la consulta o la sentencia SQL o el procedimiento almacenado
-            String sql = "{? = call fn_genera_codigo_activo(?)}";
+            String sql = "{? = call fn_genera_codigo_activo(?,?)}";
             PreparedStatement cs = conn.prepareStatement(sql);
 
             //cs = conexion.prepareCall(sql);
@@ -43,7 +43,8 @@ public class ModeloCodigoActivo extends Conexion {
             cs.setString(2, codigo_referencia);
             cs.execute();
             while (rs.next()) {
-                codigo_activo = rs.getString("codigo_activo");
+                codigo_activo = rs.getString(1);
+
             }
             //5 Asigno el valor de la consulta a la variable
 

@@ -115,78 +115,50 @@ public class ControladorIngresoActivo extends HttpServlet {
         mensaje = "";
 
         try {
-            if (!request.getParameter("txtCodigoActivo").toString().equals("")) { //valido que venga lleno el codigo de activo
-                cod_clasificacion = request.getParameter("txtCodigoActivo");
-                nombre_activo = request.getParameter("txtDescripcionCorta");
-                descripcion = request.getParameter("taDescripcionLarga");
-                cuenta_activo = request.getParameter("cbCuentasActivos");
-                cuenta_gasto = request.getParameter("cbCuentasGasto");
-                cuenta_depre_acumulada = request.getParameter("txtRefDepreAcumulada");
-                cod_empleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
-                fec_adquisicion = request.getParameter("dtFechaAdquisicion");
-                valor_adquisicion = Float.parseFloat(request.getParameter("txtValorAdquisicion"));
-                fec_inicio_depre = request.getParameter("dtFechaInicioDepreciacion");
-                porc_depre = Float.parseFloat(request.getParameter("txtPorcentajeDepreciacion"));
-                valor_inicial_libros = Float.parseFloat(request.getParameter("txtValorInicialLibros"));
-                depre_mensual = Float.parseFloat(request.getParameter("txtDepreciacionMensual"));
-                depre_anual = Float.parseFloat(request.getParameter("txtDepreciacionAnual"));
-                factura = request.getParameter("txtNumeroSerieFactura");
-                monto_factura = Float.parseFloat(request.getParameter("txtMontoFactura"));
-                observaciones = request.getParameter("taDescripcionLarga");
-                estado = "A";
-                departamento = Integer.parseInt(request.getParameter("cbDepartamento"));
-                ubicacion = Integer.parseInt(request.getParameter("cbUbicacion"));
-                cod_proveedor = Integer.parseInt(request.getParameter("cbProveedor"));
+            //valido que venga lleno el codigo de activo
+            //cod_clasificacion = request.getParameter("txtCodigoActivo");
+            cod_clasificacion = "FFF";
+            nombre_activo = request.getParameter("txtDescripcionCorta");
+            descripcion = request.getParameter("taDescripcionLarga");
+            cuenta_activo = request.getParameter("cbCuentasActivos");
+            cuenta_gasto = request.getParameter("cbCuentasGasto");
+            cuenta_depre_acumulada = request.getParameter("txtRefDepreAcumulada");
+            cod_empleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+            fec_adquisicion = request.getParameter("dtFechaAdquisicion");
+            valor_adquisicion = Float.parseFloat(request.getParameter("txtValorAdquisicion"));
+            fec_inicio_depre = request.getParameter("dtFechaInicioDepreciacion");
+            porc_depre = Float.parseFloat(request.getParameter("txtPorcentajeDepreciacion"));
+            valor_inicial_libros = Float.parseFloat(request.getParameter("txtValorInicialLibros"));
+            depre_mensual = Float.parseFloat(request.getParameter("txtDepreciacionMensual"));
+            depre_anual = Float.parseFloat(request.getParameter("txtDepreciacionAnual"));
+            factura = request.getParameter("txtNumeroSerieFactura");
+            monto_factura = Float.parseFloat(request.getParameter("txtMontoFactura"));
+            observaciones = request.getParameter("taDescripcionLarga");
+            estado = "A";
+            departamento = Integer.parseInt(request.getParameter("cbDepartamento"));
+            ubicacion = Integer.parseInt(request.getParameter("cbUbicacion"));
+            cod_proveedor = Integer.parseInt(request.getParameter("cbProveedor"));
 
-                mensaje = modeloIngresoActivo.obtenerMensajeIngresoActivo(cod_clasificacion, nombre_activo, descripcion, cuenta_activo, cuenta_gasto, cuenta_depre_acumulada, cod_empleado, fec_adquisicion, valor_adquisicion, fec_inicio_depre, porc_depre, valor_inicial_libros, depre_mensual, depre_anual, factura, monto_factura, observaciones, estado, departamento, ubicacion, cod_proveedor);
+            mensaje = modeloIngresoActivo.obtenerMensajeIngresoActivo(cod_clasificacion, nombre_activo, descripcion, cuenta_activo, cuenta_gasto, cuenta_depre_acumulada, cod_empleado, fec_adquisicion, valor_adquisicion, fec_inicio_depre, porc_depre, valor_inicial_libros, depre_mensual, depre_anual, factura, monto_factura, observaciones, estado, departamento, ubicacion, cod_proveedor);
 
-                if (mensaje.equals("OK")) {   //si el mensaje es
-                    /*Enviamos un mensaje de que se guardo el activo, para esto usamos sweetalert
+            //si el mensaje es
+            /*Enviamos un mensaje de que se guardo el activo, para esto usamos sweetalert
                     enviando desde este servlet el script que contiene jquery y sweetalert, para mostrar un bonti
                     mensaje de alerta en la página JSP*/
-                    pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    pw.println("<script>");
-                    pw.println("$(document).ready(function(){");
-                    pw.println("swal('GUARDADO','¡El activo fué guardado con éxito!', 'success');");  //alert estilo sweetalert exito
-                    //pw.println("swal('ERROR','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert error
-                    //pw.println("swal('ADVERTENCIA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert warning
-                    //pw.println("swal('INFORMACION','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert info
-                    //pw.println("swal('PREGUNTA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert question
-                    pw.println("});");
-                    pw.println("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
-                    rd.include(request, response);
-                } else if (mensaje.equals("FALLO")) {     //si el mensaje es de fallo
-                    pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    pw.println("<script>");
-                    pw.println("$(document).ready(function(){");
-                    //pw.println("swal('WELCOME','successfull !', 'success');");
-                    pw.println("swal('ERROR','¡Ocurrio un error al guardar el activo!', 'error');");  //alert estilo sweetalert error
-                    //pw.println("swal('ADVERTENCIA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert warning
-                    //pw.println("swal('INFORMACION','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert info
-                    //pw.println("swal('PREGUNTA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert question
-                    pw.println("});");
-                    pw.println("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
-                    rd.include(request, response);
-                } else if (mensaje.equals("REPETIDO")) {
-                    pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    pw.println("<script>");
-                    pw.println("$(document).ready(function(){");
-                    //pw.println("swal('WELCOME','successfull !', 'success');");
-                    //pw.println("swal('ERROR','¡Ocurrio un error al guardar el activo!', 'error');");  //alert estilo sweetalert error
-                    pw.println("swal('ADVERTENCIA','El activo ya está en la base de datos! No se puede guardar este registro.', 'warning');");  //alert estilo sweetalert warning
-                    //pw.println("swal('INFORMACION','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert info
-                    //pw.println("swal('PREGUNTA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert question
-                    pw.println("});");
-                    pw.println("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
-                    rd.include(request, response);
-                }
-            }
+            pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+            pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+            pw.println("<script>");
+            pw.println("$(document).ready(function(){");
+            pw.println("swal('GUARDADO','¡El activo fué guardado con éxito!', 'success');");  //alert estilo sweetalert exito
+            //pw.println("swal('ERROR','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert error
+            //pw.println("swal('ADVERTENCIA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert warning
+            //pw.println("swal('INFORMACION','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert info
+            //pw.println("swal('PREGUNTA','El activo fué guardado con éxito', 'success');");  //alert estilo sweetalert question
+            pw.println("});");
+            pw.println("</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pagina_Inicio.jsp");
+            rd.include(request, response);
+
         } catch (Exception e) {
             pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
             pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Pagina_Fin_Sesion
     Created on : 30/03/2019, 12:04:53 PM
     Author     : DELLMAYORGA
@@ -26,11 +26,14 @@
         <title>Fin de sesion</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <script type="text/javascript">
-            if(history.forward(1)){
-                location.replace( history.forward(1));
+            if (history.forward(1)) {
+                location.replace(history.forward(1));
             }
         </script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
+        <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
     </head>
     <body>
         <div>

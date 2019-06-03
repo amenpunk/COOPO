@@ -144,12 +144,22 @@
             margin-left:5px;
         }
     </style>
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ficha de Activos</title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 </head>
 
 
@@ -200,14 +210,16 @@
 
         <script>
             $(document).ready(function () {
-                $.getJSON("/ControladorListaEmpleado", function (respuesta) {
+
+                alert("JQUERY ON");
+                $.getJSON("/https://coopoprueba.azurewebsites.net/ActivosFijosCopo/ControladorListaEmpleado", function (respuesta) {
                     $.each(respuesta, function (key, value) {
                         $("#empleados").append("<option value='" + value.codigo_empleado + "'>" + value.nombre_empleado + " " + value.apellido_empleado + "</option>");
                     });
                 });
 
 
-                $.getJSON("/ControladorRol", function (respuesta) {
+                $.getJSON("/https://coopoprueba.azurewebsites.net/ActivosFijosCopo/ControladorRol", function (respuesta) {
                     $.each(respuesta, function (key, value) {
                         //console.log(value.codigo);
                         //alert(value.nombre);
@@ -218,7 +230,7 @@
 
                 //alert("hola mundo");
 
-                $.getJSON("/ControladorListaUsuarios", function (respuesta) {
+                $.getJSON("/https://coopoprueba.azurewebsites.net/ActivosFijosCopo/ControladorListaUsuarios", function (respuesta) {
                     $.each(respuesta, function (key, value) {
                         //console.log(value.codigo);
                         //alert(value.nombre);
